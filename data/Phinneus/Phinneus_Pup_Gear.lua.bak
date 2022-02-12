@@ -1,0 +1,882 @@
+-- Setup vars that are user-dependent.  Can override this function in a sidecar file.
+function user_job_setup()
+    state.OffenseMode:options('Normal','Acc','FullAcc','Fodder')
+    state.HybridMode:options('Pet','DT','SB','Normal')
+    state.WeaponskillMode:options('Match','Normal','Acc','FullAcc','Fodder')
+    state.PhysicalDefenseMode:options('PDT')
+	state.IdleMode:options('Normal','PDT','Refresh')
+	state.Weapons:options('None','Godhands','XiucoatlP1','XiucoatlP2')
+	state.PetMode = M{['description']='Pet Mode', 'None','Melee','Ranged','HybridRanged','Bruiser','Tank','LightTank','Magic','Heal','Nuke'}
+	state.AutoRepairMode = M(false, 'Auto Repair Mode')
+	state.AutoDeployMode = M(true, 'Auto Deploy Mode')
+	state.AutoPetMode 	 = M(false, 'Auto Pet Mode')
+	state.PetWSGear		 = M(false, 'Pet WS Gear')
+	state.PetEnmityGear	 = M(false, 'Pet Enmity Gear')
+	
+    -- Default/Automatic maneuvers for each pet mode.  Define at least 3.
+	defaultManeuvers = {
+		Melee = {
+			{Name='Fire Maneuver', 	  Amount=1},
+			{Name='Thunder Maneuver', Amount=1},
+			{Name='Wind Maneuver', 	  Amount=1},
+			{Name='Light Maneuver',	  Amount=0},
+		},
+		Bruiser = {
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Water Maneuver',   Amount=1},
+			{Name='Fire Maneuver', 	  Amount=1},
+			{Name='Light Maneuver',	  Amount=0},
+		},
+		Ranged = {
+			{Name='Wind Maneuver', 	  Amount=3},
+			{Name='Fire Maneuver',	  Amount=0},
+			{Name='Light Maneuver',	  Amount=0},
+			{Name='Thunder Maneuver', Amount=0},
+		},
+		HybridRanged = {
+			{Name='Wind Maneuver', 	  Amount=1},
+			{Name='Fire Maneuver',	  Amount=1},
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Thunder Maneuver', Amount=0},
+		},
+		Tank = {
+			{Name='Earth Maneuver',	  Amount=1},
+			{Name='Fire Maneuver',	  Amount=1},
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Dark Maneuver',	  Amount=0},
+		},
+		LightTank = {
+			{Name='Earth Maneuver',	  Amount=1},
+			{Name='Fire Maneuver',	  Amount=1},
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Dark Maneuver',	  Amount=0},
+		},
+		Magic = {
+			{Name='Light Maneuver',	  Amount=1},
+			{Name='Ice Maneuver',	  Amount=1},
+			{Name='Dark Maneuver',	  Amount=1},
+			{Name='Earth Maneuver',	  Amount=0},
+		},
+		Heal = {
+			{Name='Light Maneuver',	  Amount=2},
+			{Name='Dark Maneuver',	  Amount=1},
+			{Name='Water Maneuver',	  Amount=0},
+			{Name='Earth Maneuver',	  Amount=0},
+		},
+		Nuke = {
+			{Name='Ice Maneuver',	  Amount=2},
+			{Name='Dark Maneuver',	  Amount=1},
+			{Name='Water Maneuver',	  Amount=0},
+			{Name='Earth Maneuver',	  Amount=0},
+		},
+	}
+
+	deactivatehpp = 85
+	
+    select_default_macro_book()
+	
+	send_command('bind @` gs c cycle SkillchainMode')
+	send_command('bind @f8 gs c toggle AutoPuppetMode')
+	send_command('bind @f7 gs c toggle AutoRepairMode')
+end
+
+-- Define sets used by this job file.
+function init_gear_sets()
+
+ 	organizer_items = {
+		i001="Storage Slip 21",
+    	i002="Storage Slip 23",
+    	i003="Storage Slip 24",
+    	i004="Storage Slip 27",
+		}	
+
+	sets.TreasureHunter = set_combine(sets.TreasureHunter, {hands=gear.herculean_hands_th,feet=gear.herculean_feet_th})
+    
+    -- Precast Sets
+
+    -- Fast cast sets for spells
+    sets.precast.FC = {
+	head=gear.herculean_head_fc,
+	neck="Orunmila's Torque",
+	ear1="Enchntr. Earring +1",
+	ear2="Loquac. Earring",
+	body="Zendik Robe",
+	hands="Malignance Gloves",
+	ring1="Lebeche Ring",
+	ring2="Weather. Ring +1",
+	back="Fi Follet Cape +1",
+	waist="Isa Belt",
+	legs="Rawhide Trousers",
+	feet="Regal Pumps +1"}
+
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
+
+    
+    -- Precast sets to enhance JAs
+    sets.precast.JA['Tactical Switch'] = {feet="Karagoz Scarpe +1"}
+    sets.precast.JA['Repair'] = {
+		ammo="Automat. Oil +3",
+		head=gear.herculean_head_pet_repair,
+		ear1="Pratik Earring",
+		ear2="Guignol Earring",
+		body=gear.herculean_body_pet_repair,
+		hands=gear.herculean_hands_pet_repair,
+		ring2="Overbearing Ring",
+		back=gear.cape_pup_petmab,
+		legs=gear.herculean_legs_pet_repair,
+		feet="Foire Babouches +2"} 
+	sets.precast.JA['Maintenance'] = {ammo="Automat. Oil +3"}
+
+    sets.precast.JA.Maneuver = {
+		--neck="Buffoon's Collar +1",
+		body="Kara. Farsetto +1",
+		back="Visucius's Mantle"} --neck="Buffoon's Collar",hands="Foire Dastanas",body="Cirque Farsetto +2",
+
+    -- Waltz set (chr and vit)
+    sets.precast.Waltz = {}
+        
+    sets.precast.Waltz['Healing Waltz'] = {}
+
+       
+    -- Weaponskill sets
+    -- Default set for any weaponskill that isn't any more specifically defined
+    sets.precast.WS = {--based off of Raging Fists set
+        head="Mpaca's Cap",
+		neck="Fotia Gorget",
+		ear1="Schere Earring",
+		ear2="Moonshade Earring",
+        body="Mpaca's Doublet",
+		hands="Pitre Dastanas +3",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_crit,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+	sets.precast.WS.Acc = {
+        head="Mpaca's Cap",
+		neck="Fotia Gorget",
+		ear1="Schere Earring",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Pitre Dastanas +3",
+		ring1="Regal Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_crit,
+		waist="Grunfeld Rope",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+	sets.precast.WS.FullAcc = {
+        head="Mpaca's Cap",
+		neck="Combatant's Torque",
+		ear1="Digni. Earring",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Pitre Dastanas +3",
+		ring1="Regal Ring",
+		ring2="Ramuh Ring +1",
+        back=gear.cape_pup_crit,
+		waist="Olseni Belt",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+	sets.precast.WS.Fodder = {
+        head="Mpaca's Cap",
+		neck="Fotia Gorget",
+		ear1="Schere Earring",
+		ear2="Moonshade Earring",
+        body="Mpaca's Doublet",
+		hands="Pitre Dastanas +3",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_crit,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+		
+    -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+    sets.precast.WS['Victory Smite'] = set_combine(sets.precast.WS, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",})
+    sets.precast.WS['Victory Smite'].Acc = set_combine(sets.precast.WS.Acc, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",})
+	sets.precast.WS['Victory Smite'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",})
+	sets.precast.WS['Victory Smite'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",})
+	
+    sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",
+		waist="Fotia Belt",})
+    sets.precast.WS['Stringing Pummel'].Acc = set_combine(sets.precast.WS.FullAcc, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",
+		waist="Fotia Belt",})
+	sets.precast.WS['Stringing Pummel'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",
+		waist="Fotia Belt",})
+	sets.precast.WS['Stringing Pummel'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		head="Blistering Sallet +1",
+		hands="Ryuo Tekko +1",
+		waist="Fotia Belt",})
+
+    sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {
+		head="Malignance Chapeau",
+		ear2="Mache Earring +1",
+		body="Tali'ah Manteel +2",
+		hands="Malignance Gloves",
+		back=gear.cape_pup_dexda,
+		legs="Samnuha Tights",
+		feet=gear.herculean_feet_ta,})
+    sets.precast.WS['Shijin Spiral'].Acc = set_combine(sets.precast.WS.Acc, {
+		head="Malignance Chapeau",
+		ear2="Mache Earring +1",
+		body="Tali'ah Manteel +2",
+		hands="Malignance Gloves",
+		back=gear.cape_pup_dexda,		
+		legs="Samnuha Tights",})
+	sets.precast.WS['Shijin Spiral'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		head="Malignance Chapeau",
+		ear2="Mache Earring +1",
+		body="Tali'ah Manteel +2",
+		hands="Malignance Gloves",
+		back=gear.cape_pup_dexda,})
+	sets.precast.WS['Shijin Spiral'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		head="Malignance Chapeau",
+		ear2="Mache Earring +1",
+		body="Tali'ah Manteel +2",
+		hands="Malignance Gloves",
+		back=gear.cape_pup_dexda,		
+		legs="Samnuha Tights",
+		feet=gear.herculean_feet_ta,})
+	
+    sets.precast.WS['Asuran Fists'] = set_combine(sets.precast.WS, {
+		head="Nyame Helm",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		back=gear.cape_pup_strwsd,
+		waist="Fotia Belt",
+		feet="Nyame Sollerets"})
+    sets.precast.WS['Asuran Fists'].Acc = set_combine(sets.precast.WS.Acc, {
+		head="Nyame Helm",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		back=gear.cape_pup_strwsd,		
+		waist="Fotia Belt",
+		feet="Nyame Sollerets"})
+	sets.precast.WS['Asuran Fists'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		head="Nyame Helm",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		back=gear.cape_pup_strwsd,		
+		waist="Fotia Belt",
+		feet="Nyame Sollerets"})
+	sets.precast.WS['Asuran Fists'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		head="Nyame Helm",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		back=gear.cape_pup_strwsd,		
+		waist="Fotia Belt",
+		feet="Nyame Sollerets"})
+	
+    sets.precast.WS['Dragon Kick'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Dragon Kick'].Acc = set_combine(sets.precast.WS.Acc, {})
+	sets.precast.WS['Dragon Kick'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	sets.precast.WS['Dragon Kick'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+
+    sets.precast.WS['Tornado Kick'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Tornado Kick'].Acc = set_combine(sets.precast.WS.Acc, {})
+	sets.precast.WS['Tornado Kick'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	sets.precast.WS['Tornado Kick'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+	
+    sets.precast.WS['Raging Fists'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Raging Fists'].Acc = set_combine(sets.precast.WS.Acc, {})
+	sets.precast.WS['Raging Fists'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	sets.precast.WS['Raging Fists'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+	
+    sets.precast.WS['Howling Fist'] = set_combine(sets.precast.WS, {
+		--neck="Pup. Collar +2",
+		body="Tali'ah Manteel +2",
+		back=gear.cape_pup_vitda,
+		feet=gear.herculean_feet_ta})
+    sets.precast.WS['Howling Fist'].Acc = set_combine(sets.precast.WS.Acc, {
+		--neck="Pup. Collar +2",
+		body="Tali'ah Manteel +2",
+		back=gear.cape_pup_vitda,
+		feet=gear.herculean_feet_ta})
+	sets.precast.WS['Howling Fist'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		--neck="Pup. Collar +2",
+		body="Tali'ah Manteel +2",
+		back=gear.cape_pup_vitda,})
+	sets.precast.WS['Howling Fist'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		--neck="Pup. Collar +2",
+		body="Tali'ah Manteel +2",
+		back=gear.cape_pup_vitda,})
+	
+    sets.precast.WS['Backhand Blow'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Backhand Blow'].Acc = set_combine(sets.precast.WS.Acc, {})
+	sets.precast.WS['Backhand Blow'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	sets.precast.WS['Backhand Blow'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+	
+    sets.precast.WS['Spinning Attack'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Spinning Attack'].Acc = set_combine(sets.precast.WS.Acc, {})
+	sets.precast.WS['Spinning Attack'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	sets.precast.WS['Spinning Attack'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+	
+    sets.precast.WS['Shoulder Tackle'] = set_combine(sets.precast.WS, {
+		neck="Sanctity Necklace",
+		ear1="Digni. Earring",
+		ring1="Metamor. Ring +1",
+		back="Aurist's Cape +1",
+		waist="Skrymir Cord +1",})
+    sets.precast.WS['Shoulder Tackle'].Acc = set_combine(sets.precast.WS.Acc, {
+		neck="Sanctity Necklace",
+		ear1="Digni. Earring",
+		ring1="Metamor. Ring +1",
+		back="Aurist's Cape +1",
+		waist="Skrymir Cord +1",})
+	sets.precast.WS['Shoulder Tackle'].FullAcc = set_combine(sets.precast.WS.FullAcc, {
+		neck="Sanctity Necklace",
+		ear1="Digni. Earring",
+		ring1="Metamor. Ring +1",
+		back="Aurist's Cape +1",
+		waist="Skrymir Cord +1",})
+	sets.precast.WS['Shoulder Tackle'].Fodder = set_combine(sets.precast.WS.Fodder, {
+		neck="Sanctity Necklace",
+		ear1="Digni. Earring",
+		ring1="Metamor. Ring +1",
+		back="Aurist's Cape +1",
+		waist="Skrymir Cord +1",})
+    -- Midcast Sets
+
+    sets.midcast.FastRecast = {
+		head=gear.herculean_head_fc,
+		head="Malignance Chapeau",
+		neck="Orunmila's Torque",
+		ear1="Enchntr. Earring +1",
+		ear2="Loquac. Earring",
+		body="Zendik Robe",
+		hands="Malignance Gloves",
+		ring1="Lebeche Ring",
+		ring2="Weather. Ring +1",
+		back="Fi Follet Cape +1",
+		waist="Isa Belt",
+		legs="Rawhide Trousers",
+		feet="Regal Pumps +1"}
+	
+	sets.midcast.Dia = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+	sets.midcast.Diaga = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+	sets.midcast['Dia II'] = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+	sets.midcast.Bio = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+	sets.midcast['Bio II'] = set_combine(sets.midcast.FastRecast, sets.TreasureHunter)
+	
+    -- Midcast sets for pet actions
+    sets.midcast.Pet.Cure = {}
+	sets.midcast.Pet['Enfeebling Magic'] = {
+		head="Mpaca's Cap",
+		neck="Adad Amulet",
+		--neck="Pup. Collar +2",
+		ear1="Enmerkar Earring",
+		ear2="Handler's Earring +1",
+		body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="C. Palug Ring",
+		ring2="Tali'ah Ring",
+		back=gear.cape_pup_petmab,
+		waist="Ukko Sash",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+    sets.midcast.Pet['Elemental Magic'] = {
+		head=gear.herculean_head_pet_mab,
+		neck="Adad Amulet",--Pup. Collar +2
+		ear1="Enmerkar Earring",
+		ear2="Kyrene's Earring",
+		body="Udug Jacket",
+		hands=gear.herculean_hands_pet_mab,
+		ring1="C. Palug Ring",
+		ring2="Tali'ah Ring",
+		waist="Ukko Sash",
+		legs="Pitre Churidars +3",
+		feet="Pitre Babouches +3",}
+	
+	-- The following sets are predictive and are equipped before we even know the ability will happen, as a workaround due to
+	-- the fact that start of ability packets are too late in the case of Pup abilities, WS, and certain spells.
+	sets.midcast.Pet.PetEnmityGear = {
+		head="Heyoka Cap +1",
+		ear1="Rimeice Earring",
+		ear2="Domes. Earring",
+		body="Heyoka Harness +1",
+		legs="Heyoka Subligar +1",}
+	sets.midcast.Pet.PetWSGear = {
+		main="Xiucoatl",
+		head=gear.herculean_head_pet_da,
+		neck="Shulmanu Collar",
+		ear1="Kyrene's Earring",
+		ear2="Domes. Earring",
+        body=gear.taeon_body_pet_da,
+		hands="Mpaca's Gloves",
+		ring1="C. Palug Ring",
+		ring2={name="Varar Ring +1",bag="wardrobe3"},
+        back=gear.cape_pup_petatk,
+		waist="Incarnation Sash",
+		legs=gear.herculean_legs_pet_da,
+		feet="Mpaca's Boots"}
+	
+    sets.midcast.Pet.PetWSGear.Ranged = set_combine(sets.midcast.Pet.PetWSGear, {
+		head="Karagoz Capello +1",
+		body="Pitre Tobe +3",
+		ring2="Overbearing Ring",
+		back="Dispersal Mantle",
+		waist="Klouskap Sash +1",
+		feet=gear.herculean_feet_pet_da})
+	sets.midcast.Pet.PetWSGear.Melee = set_combine(sets.midcast.Pet.PetWSGear, {})
+	sets.midcast.Pet.PetWSGear.Tank = set_combine(sets.midcast.Pet.PetWSGear, {})
+	sets.midcast.Pet.PetWSGear.Bruiser = set_combine(sets.midcast.Pet.PetWSGear, {})
+	sets.midcast.Pet.PetWSGear.LightTank = set_combine(sets.midcast.Pet.PetWSGear, {})
+    sets.midcast.Pet.PetWSGear.Magic = set_combine(sets.midcast.Pet.PetWSGear, {})
+	sets.midcast.Pet.PetWSGear.Heal = set_combine(sets.midcast.Pet.PetWSGear, {})
+	sets.midcast.Pet.PetWSGear.Nuke = set_combine(sets.midcast.Pet.PetWSGear, {})
+    
+	-- Currently broken, preserved in case of future functionality.
+	--sets.midcast.Pet.WeaponSkill = {}
+
+    -- Sets to return to when not performing an action.
+    
+    -- Resting sets
+    sets.resting = {}
+    
+
+    -- Idle sets
+
+    sets.idle = {
+        head="Pitre Taj +3",
+		neck="Bathy Choker +1",
+		ear1="Etiolation Earring",
+		ear2="Sanare Earring",
+        body="Hiza. Haramaki +2",
+		hands="Rao Kote +1",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2={name="Chirich Ring +1",bag="wardrobe4"},
+        back=gear.cape_pup_petmab,
+		waist="Isa Belt",
+		legs="Rao Haidate +1",
+		feet="Rao Sune-ate +1"}
+		
+	sets.idle.Town = {
+		ammo="Automat. Oil +3",
+        head="Ryuo Somen +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands=gear.herculean_hands_qa,
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Ryuo Hakama +1",
+		feet=gear.herculean_feet_ta}
+	
+	sets.idle.PDT = {
+        head="Nyame Helm",
+		neck="Unmoving Collar +1",
+		ear1="Odnowa Earring +1",
+		ear2="Tuisto Earring",
+        body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="C. Palug Ring",
+		ring2="Gelatinous Ring +1",
+        back="Moonlight Cape",
+		waist="Moonbow Belt +1",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets"}		
+
+	sets.idle.Refresh = {
+        head="Pitre Taj +3",
+		neck="Loricate Torque +1",
+		ear1="Etiolation Earring",
+		ear2="Sanare Earring",
+        body="Vrikodara Jupon",
+		hands=gear.herculean_hands_refresh,
+		ring1={name="Stikini Ring +1", bag="wardrobe3"},
+		ring2={name="Stikini Ring +1",bag="wardrobe4"},
+        back="Moonlight Cape",
+		waist="Fucho-no-Obi",
+		legs="Rawhide Trousers",
+		feet="Nyame Sollerets"}
+		
+    -- Set for idle while pet is out (eg: pet regen gear)
+    sets.idle.Pet = {
+		head="Pitre Taj +3",
+		neck="Bathy Choker +1",
+		ear1="Etiolation Earring",
+		ear2="Sanare Earring",
+        body="Hiza. Haramaki +2",
+		hands="Rao Kote +1",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2={name="Chirich Ring +1",bag="wardrobe4"},
+        back=gear.cape_pup_petmab,
+		waist="Isa Belt",
+		legs="Rao Haidate +1",
+		feet="Rao Sune-ate +1"}
+
+    -- Idle sets to wear while pet is engaged
+    sets.idle.Pet.Engaged = {
+        head=gear.taeon_head_pet_da,
+		neck="Shulmanu Collar",
+		ear1="Enmerkar Earring",
+		ear2="Crep. Earring",
+		body="Pitre Tobe +3",
+		hands=gear.taeon_hands_pet_da,
+		ring1="C. Palug Ring",
+		ring2={name="Varar Ring +1",bag="wardrobe3"},
+		back=gear.cape_pup_petatk,
+		waist="Klouskap Sash +1",
+		legs=gear.taeon_legs_pet_da,
+		feet="Mpaca's Boots",}
+
+    sets.idle.Pet.Engaged.Ranged = set_combine(sets.idle.Pet.Engaged, {
+		head="Pitre Taj +3",
+		hands="Mpaca's Gloves",
+		ring1={name="Varar Ring +1",bag="wardrobe"},
+		legs="Kara. Pantaloni +1",})
+	sets.idle.Pet.Engaged.Melee = set_combine(sets.idle.Pet.Engaged, {})
+	sets.idle.Pet.Engaged.Tank = set_combine(sets.idle.Pet.Engaged, {
+		head="Anwig Salade",
+		neck="Shepherd's Chain",
+		ear2="Rimeice Earring",
+		body="Rao Togi +1",
+		hands="Rao Kote +1",
+		ring2="Overbearing Ring",
+		waist="Isa Belt",
+		legs="Rao Haidate +1",
+		feet="Rao Sune-ate +1",})
+	sets.idle.Pet.Engaged.Bruiser = set_combine(sets.idle.Pet.Engaged, {
+		head="Anwig Salade",
+		ear2="Rimeice Earring",
+		body=gear.taeon_body_pet_da,
+		hands=gear.taeon_hands_pet_da,
+		waist="Incarnation Sash",
+		legs=gear.taeon_legs_pet_da,
+		feet=gear.taeon_feet_pet_da})
+	sets.idle.Pet.Engaged.LightTank = set_combine(sets.idle.Pet.Engaged, {
+		waist="Isa Belt",
+		ear2="Handler's Earring +1"})
+    sets.idle.Pet.Engaged.Magic = set_combine(sets.idle.Pet.Engaged, {})
+	sets.idle.Pet.Engaged.Heal = sets.idle.Pet.Engaged.Magic
+	sets.idle.Pet.Engaged.Nuke = sets.idle.Pet.Engaged.Magic
+
+
+    -- Defense sets
+
+    sets.defense.PDT = {
+        head="Nyame Helm",
+		neck="Unmoving Collar +1",
+		ear1="Odnowa Earring +1",
+		ear2="Tuisto Earring",
+        body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="C. Palug Ring",
+		ring2="Gelatinous Ring +1",
+        back="Moonlight Cape",
+		waist="Moonbow Belt +1",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets"}
+
+    sets.defense.MDT = {
+        head="Nyame Helm",
+		neck="Warder's Charm +1",
+		ear1="Odnowa Earring +1",
+		ear2="Eabani Earring",
+        body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="C. Palug Ring",
+		ring2="Purity Ring",
+        back="Moonlight Cape",
+		waist="Carrier's Sash",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets"}
+		
+    sets.defense.MEVA = {
+        head="Nyame Helm",
+		neck="Warder's Charm +1",
+		ear1="Odnowa Earring +1",
+		ear2="Eabani Earring",
+        body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="C. Palug Ring",
+		ring2="Purity Ring",
+        back="Moonlight Cape",
+		waist="Carrier's Sash",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets"}
+		
+    sets.Kiting = {}
+
+	sets.buff.Doom = set_combine(sets.buff.Doom, {})
+	
+	sets.buff.Overdrive = {
+		head="Karagoz Capello +1",
+		neck="Shulmanu Collar",
+		ear1="Enmerkar Earring",
+		ear2="Crep. Earring",
+		body="Pitre Tobe +3",
+		hands="Mpaca's Gloves",
+		ring1="C. Palug Ring",
+		ring2={name="Varar Ring +1",bag="wardrobe3"},
+		back=gear.cape_pup_petatk,
+		waist="Klouskap Sash +1",
+		legs="Heyoka Subligar +1",
+		feet="Tali'ah Crackows +2"}
+
+    -- Engaged sets
+
+    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
+    -- sets if more refined versions aren't defined.
+    -- If you create a set with both offense and defense modes, the offense mode should be first.
+    -- EG: sets.engaged.Dagger.Accuracy.Evasion
+    
+    -- Normal melee group
+    sets.engaged = {
+        head="Ryuo Somen +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands=gear.herculean_hands_qa,
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Ryuo Hakama +1",
+		feet=gear.herculean_feet_ta}
+    sets.engaged.Acc = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Ryuo Tekko +1",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Grunfeld Rope",
+		legs="Ryuo Hakama +1",
+		feet=gear.herculean_feet_ta}
+    sets.engaged.FullAcc = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Ryuo Tekko +1",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2={name="Chirich Ring +1",bag="wardrobe4"},
+        back="Visucius's Mantle",
+		waist="Grunfeld Rope",
+		legs="Mpaca's Hose",
+		 feet="Mpaca's Boots"}
+	sets.engaged.Fodder = {
+        head="Ryuo Somen +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands=gear.herculean_hands_qa,
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Ryuo Hakama +1",
+		feet=gear.herculean_feet_ta}
+
+	sets.engaged.DT = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+    sets.engaged.Acc.DT = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+    sets.engaged.FullAcc.DT = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+    sets.engaged.Fodder.DT = {
+        head="Mpaca's Cap",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Telos Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots"}
+ 
+	sets.engaged.Pet = {
+        head="Heyoka Cap +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_petatk,
+		waist="Moonbow Belt +1",
+		legs="Heyoka Subligar +1",
+		feet="Mpaca's Boots"}
+    sets.engaged.Acc.Pet = {
+        head="Heyoka Cap +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_petatk,
+		waist="Moonbow Belt +1",
+		legs="Heyoka Subligar +1",
+		feet="Mpaca's Boots"}
+    sets.engaged.FullAcc.Pet = {
+        head="Heyoka Cap +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_petatk,
+		waist="Moonbow Belt +1",
+		legs="Heyoka Subligar +1",
+		feet="Mpaca's Boots"}
+    sets.engaged.Fodder.Pet = {
+        head="Heyoka Cap +1",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_petatk,
+		waist="Moonbow Belt +1",
+		legs="Heyoka Subligar +1",
+		feet="Mpaca's Boots"}
+
+    sets.engaged.SB = {
+        head="Malignance Chapeau",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+    sets.engaged.Acc.SB = {
+        head="Malignance Chapeau",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+	sets.engaged.FullAcc.SB = {
+        head="Malignance Chapeau",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+    sets.engaged.Fodder.SB = {
+        head="Malignance Chapeau",
+		neck="Shulmanu Collar",
+		ear1="Mache Earring +1",
+		ear2="Crep. Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1={name="Chirich Ring +1",bag="wardrobe3"},
+		ring2="Niqmaddu Ring",
+        back=gear.cape_pup_tp,
+		waist="Moonbow Belt +1",
+		legs="Mpaca's Hose",
+		feet="Malignance Boots"}
+			
+	-- Weapons sets
+	sets.weapons.XiucoatlP1 = {main="Xiucoatl",range="Animator P +1",}
+	sets.weapons.XiucoatlP2 = {main="Xiucoatl",range="Animator P II +1",}
+	sets.weapons.Godhands = {main="Godhands",range="Animator P +1",}
+end
+
+-- Select default macro book on initial load or subjob change.
+function select_default_macro_book()
+    -- Default macro set/book
+    if player.sub_job == 'DNC' then
+        set_macro_page(2, 20)
+    elseif player.sub_job == 'NIN' then
+        set_macro_page(2, 20)
+    elseif player.sub_job == 'THF' then
+        set_macro_page(2, 20)
+    else
+        set_macro_page(2, 20)
+    end
+end

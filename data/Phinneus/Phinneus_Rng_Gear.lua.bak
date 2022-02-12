@@ -1,0 +1,674 @@
+-- Setup vars that are user-dependent.  Can override this function in a sidecar file.
+function user_job_setup()
+	state.OffenseMode:options('Normal','Acc')
+	state.HybridMode:options('Normal','DTLite','DT')
+	state.RangedMode:options('Normal','Acc','Fodder')
+	state.WeaponskillMode:options('Match','Normal', 'Acc')
+	state.IdleMode:options('Normal', 'PDT')
+	state.Weapons:options('DualTrueflight','Fomalhaut','CritGun','DualFomalhaut','DualSavage','DualWildfire','DualCritGun','DualMagicWeapons')
+	
+	WeaponType =  {['Yoichinoyumi'] = "Bow",
+				   ['Gandiva'] = "Bow",
+                   ['Fail-Not'] = "Bow",
+                   ['Accipiter'] = "Bow",
+                   ['Annihilator'] = "Gun",
+                   ['Armageddon'] = "Gun",
+                   ['Fomalhaut'] = "Gun",
+				   ['Ataktos'] = "Gun",
+                   ['Gastraphetes'] = "Crossbow",
+				   ['Sparrowhawk +2'] = "Sword",
+                   }
+	
+	DefaultAmmo = {
+		['Bow']  = {['Default'] = "Yoichi's Arrow",--chrono arrow
+					['WS'] = "Yoichi's Arrow",
+					['Acc'] = "Yoichi's Arrow",
+					['Magic'] = "Yoichi's Arrow",
+					['MagicAcc'] = "Yoichi's Arrow",
+					['Unlimited'] = "Hauksbok Arrow",
+					['MagicUnlimited'] ="Hauksbok Arrow",
+					['MagicAccUnlimited'] ="Hauksbok Arrow"},
+					
+		['Gun']  = {['Default'] = "Chrono Bullet",
+					['WS'] = "Chrono Bullet",
+					['Acc'] = "Eradicating Bullet",
+					['Magic'] = "Devastating Bullet",
+					['MagicAcc'] = "Devastating Bullet",
+					['Unlimited'] = "Hauksbok Bullet",
+					['MagicUnlimited'] = "Hauksbok Bullet",
+					['MagicAccUnlimited'] ="Animikii Bullet"},
+					
+		['Crossbow'] = {['Default'] = "Quelling Bolt",
+						['WS'] = "Quelling Bolt",
+						['Acc'] = "Quelling Bolt",
+						['Magic'] = "Quelling Bolt",
+						['MagicAcc'] = "Quelling Bolt",
+						['Unlimited'] = "Hauksbok Bolt",
+						['MagicUnlimited'] = "Hauksbok Bolt",
+						['MagicAccUnlimited'] = "Hauksbok Bolt"},
+						
+		['Sword']  = {['Default'] = "Hauksbok Arrow",--chrono arrow
+					['WS'] = "Hauksbok Arrow",
+					['Acc'] = "Hauksbok Arrow",
+					['Magic'] = "Hauksbok Arrow",
+					['MagicAcc'] = "Hauksbok Arrow",
+					['Unlimited'] = "Hauksbok Arrow",
+					['MagicUnlimited'] ="Hauksbok Arrow",
+					['MagicAccUnlimited'] ="Hauksbok Arrow"},		
+	}
+	
+	--gear.snapshot_jse_back = {name="Belenus's Cape",augments={'"Snapshot"+10',}}
+	
+	    -- Additional local binds
+    send_command('bind !` input /ra <t>')
+	send_command('bind !backspace input /ja "Bounty Shot" <t>')
+	send_command('bind @f7 gs c toggle RngHelper')
+	send_command('bind @` gs c cycle SkillchainMode')
+	send_command('bind !r gs c weapons MagicWeapons;gs c update')
+	send_command('bind ^q gs c weapons SingleWeapon;gs c update')
+	
+	select_default_macro_book()
+
+end
+
+-- Set up all gear sets.
+function init_gear_sets()
+
+	organizer_items = {
+    	i001="Storage Slip 21", 
+    	i002="Storage Slip 23",
+		i003="Storage Slip 24",
+		i004="Storage Slip 27",
+    	i005="Storage Slip 28",
+    	i006="Chr. Bullet Pouch",
+		i007="Yoichi's Quiver",
+		i008="Quelling B. Quiver",
+		i009="Quelling Bolt",
+		i010="Chrono Bullet",
+		i011="Yoichi's Arrow",
+		i012="Hauksbok Bullet",
+		i013="Hauksbok Bolt",
+		i014="Animikii Bullet",
+		i015="Orichalc. Bullet",
+	}
+
+	--------------------------------------
+	-- Precast sets
+	--------------------------------------
+
+	
+	
+	-- Precast sets to enhance JAs
+	sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
+	sets.precast.JA['Bounty Shot'] = set_combine(sets.TreasureHunter, {hands="Amini Glove. +1"})
+	sets.precast.JA['Camouflage'] = {body="Orion Jerkin +2"}
+	sets.precast.JA['Scavenge'] = {feet="Orion Socks +2"}
+	sets.precast.JA['Shadowbind'] = {hands="Orion Bracers +2"}
+	sets.precast.JA['Sharpshot'] = {legs="Orion Braccae +2"}
+	sets.precast.JA['Double Shot'] = {back=gear.tp_ranger_jse_back}
+
+
+	-- Fast cast sets for spells
+
+    sets.precast.FC = {
+        head="Carmine Mask +1",
+		neck="Orunmila's Torque",
+		ear1="Enchntr. Earring +1",
+		ear2="Loquac. Earring",
+        body="Adhemar Jacket",
+		hands="Leyline Gloves",
+		ring1="Prolix Ring",
+		ring2="Lebeche Ring",
+        back="Moonlight Cape",
+		waist="Flume Belt +1",
+		legs="Rawhide Trousers",
+		feet="Carmine Greaves +1"}
+
+	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads",body="Passion Jacket"})
+
+
+	-- Ranged sets (snapshot)
+	
+	sets.precast.RA = {
+		head=gear.taeon_head_snap, --9
+		neck="Scout's Gorget +2",
+		body="Amini Caban +1",
+		hands="Carmine Fin. Ga. +1",
+		ring1="Crepuscular Ring",
+		back=gear.cape_rng_snap,
+		waist="Impulse Belt",
+		legs="Orion Braccae +2",
+		feet="Meg. Jam. +2"} --38
+		
+	sets.precast.RA.Flurry = set_combine(sets.precast.RA, {
+		head="Orion Beret +2",
+		legs="Adhemar Kecks +1",})
+	sets.precast.RA.Flurry2 = set_combine(sets.precast.RA, {
+		waist="Yemaya Belt",
+		feet="Arcadian Socks +3",})
+
+
+	-- Weaponskill sets
+	-- Default set for any weaponskill that isn't any more specifically defined
+    sets.precast.WS = {
+        head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Ishvara Earring",
+        body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+        back=gear.cape_rng_agiwsd,
+		waist="Fotia Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets"}
+		
+    sets.precast.WS.Acc = {
+        head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Telos Earring",
+        body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Dingir Ring",
+        back=gear.cape_rng_agiwsd,
+		waist="Fotia Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets"}
+
+    sets.precast.WS['Wildfire'] = {
+        head="empty",
+		neck="Baetyl Pendant",
+		ear1="Crematio Earring",
+		ear2="Friomisi Earring",
+        body="Cohort Cloak +1",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+        back=gear.cape_rng_agimab,
+		waist="Orpheus's Sash",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+    sets.precast.WS['Wildfire'].Acc = {
+        head="empty",
+		neck="Scout's Gorget +2",
+		ear1="Crematio Earring",
+		ear2="Friomisi Earring",
+        body="Cohort Cloak +1",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		ring2="Dingir Ring",
+        back=gear.cape_rng_agimab,
+		waist="Skrymir Cord +1",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets"}
+		
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'],{
+        ring1="Metamor. Ring +1",})
+		
+    sets.precast.WS['Trueflight'] = {
+        head="empty",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Friomisi Earring",
+        body="Cohort Cloak +1",
+		hands="Nyame Gauntlets",
+		ring1="Weather. Ring +1",
+		ring2="Epaminondas's Ring",
+        back=gear.cape_rng_agimab,
+		waist="Orpheus's Sash",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+    sets.precast.WS['Trueflight'].Acc = {
+        head="empty",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Friomisi Earring",
+        body="Cohort Cloak +1",
+		hands="Nyame Gauntlets",
+		ring1="Weather. Ring +1",
+		ring2="Epaminondas's Ring",
+        back=gear.cape_rng_agimab,
+		waist="Orpheus's Sash",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+	
+	sets.precast.WS['Savage Blade'] = {
+		ammo="Hauksbok Arrow",
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Ishvara Earring",
+		body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+		back=gear.cape_rng_strwsd,
+		waist="Sailfi Belt +1",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+	
+	sets.precast.WS['Savage Blade'].Acc = {
+		ammo="Hauksbok Arrow",
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+		back=gear.cape_rng_strwsd,
+		waist="Olseni Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+	sets.precast.WS['Last Stand'] = {
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Ishvara Earring",
+		body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+		back=gear.cape_rng_agiwsd,
+		waist="Fotia Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+	sets.precast.WS['Last Stand'] = {
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Telos Earring",
+		body="Nyame Mail",
+		hands="Meg. Gloves +2",
+		ring1="Regal Ring",
+		ring2="Epaminondas's Ring",
+		back=gear.cape_rng_agiwsd,
+		waist="K. Kachina Belt +1",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+	sets.precast.WS['Flaming Arrow'] = {
+		head="empty",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Friomisi Earring",
+		body="Cohort Cloak +1",
+		hands="Carmine Finger Gauntlets +1",
+		ring1="Regal Ring",
+		ring2="Dingir Ring",
+		back=gear.cape_rng_agimab,
+		waist="Fotia Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+	sets.precast.WS['Flaming Arrow'].Acc = {
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Friomisi Earring",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		ring1="Regal Ring",
+		ring2="Dingir Ring",
+		back=gear.cape_rng_agimab,
+		waist="Fotia Belt",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}
+
+		sets.precast.WS['Hot Shot'] = sets.precast.WS['Flaming Arrow']
+		sets.precast.WS['Hot Shot'].Acc = sets.precast.WS['Flaming Arrow'].Acc
+		
+	-- Swap to these on Moonshade using WS if at 3000 TP
+	sets.MaxTP = {}
+	sets.AccMaxTP = {}
+
+	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+
+
+	--------------------------------------
+	-- Midcast sets
+	--------------------------------------
+
+	-- Fast recast for spells
+	
+    sets.midcast.FastRecast = {
+        head="Carmine Mask +1",
+		neck="Orunmila's Torque",
+		ear1="Enchntr. Earring +1",
+		ear2="Loquac. Earring",
+        body="Adhemar Jacket",
+		hands="Leyline Gloves",
+		ring1="Kishar Ring",
+		ring2="Lebeche Ring",
+        back="Moonlight Cape",
+		waist="Flume Belt +1",
+		legs="Rawhide Trousers",
+		feet="Carmine Greaves +1"}
+		
+	-- Ranged sets
+
+    sets.midcast.RA = {
+        head="Arcadian Beret +3",
+		neck="Scout's Gorget +2",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
+        body="Nisroch Jerkin",
+		hands="Malignance Gloves",
+		ring1="Regal Ring",
+		ring1="Crepuscular Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_shoot,
+		waist="K. Kachina Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+	
+    sets.midcast.RA.Acc = {
+        head="Malignance Chapeau",
+		neck="Iskur Gorget",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1="Regal Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_shoot,
+		waist="K. Kachina Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+		
+    sets.midcast.RA.Fodder = {
+        head="Arcadian Beret +3",
+		neck="Scout's Gorget +2",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
+        body="Nisroch Jerkin",
+		hands="Malignance Gloves",
+		ring1="Regal Ring",
+		ring1="Crepuscular Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_shoot,
+		waist="K. Kachina Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+
+    sets.midcast.RA.AM = {
+        head="Meghanada Visor +2",
+		neck="Scout's Gorget +2",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+        body="Nisroch Jerkin",
+		hands="Mummu Wrists +2",
+		ring1="Begrudging Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_crit,
+		waist="K. Kachina Belt +1",
+		legs="Darraigner's Brais",
+		feet="Osh. Leggings +1"}
+	
+    sets.midcast.RA.Acc.AM = {
+        head="Meghanada Visor +2",
+		neck="Scout's Gorget +2",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+        body="Nisroch Jerkin",
+		hands="Mummu Wrists +2",
+		ring1="Regal Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_crit,
+		waist="K. Kachina Belt +1",
+		legs="Malignance Tights",
+		feet="Osh. Leggings +1"}
+		
+    sets.midcast.RA.Fodder.AM = {
+        head="Meghanada Visor +2",
+		neck="Scout's Gorget +2",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+        body="Nisroch Jerkin",
+		hands="Mummu Wrists +2",
+		ring1="Begrudging Ring",
+		ring2="Ilabrat Ring",
+        back=gear.cape_rng_crit,
+		waist="K. Kachina Belt +1",
+		legs="Darraigner's Brais",
+		feet="Osh. Leggings +1"}
+		
+	--These sets will overlay based on accuracy level, regardless of other options.
+	sets.buff.Camouflage = {body="Orion Jerkin +2"}
+	sets.buff.Camouflage.Acc = {}
+	sets.buff['Double Shot'] = {
+		head="Arcadian Beret +3",
+		body="Arc. Jerkin +3",
+		hands="Oshosi Gloves +1",
+		back=gear.cape_rng_crit,
+		legs="Osh. Trousers +1",
+		feet="Osh. Leggings +1"}
+	sets.buff['Double Shot'].Acc = {
+		head="Arcadian Beret +3",
+		body="Arc. Jerkin +3",
+		hands="Oshosi Gloves +1",
+		back=gear.cape_rng_crit,
+		legs="Osh. Trousers +1",
+		feet="Osh. Leggings +1"}
+	sets.buff.Barrage = {
+		head="Orion Beret +2",
+		neck="Scout's Gorget +2",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+		body="Orion Jerkin +2",
+		hands="Orion Bracers +2",
+		ring1="Regal Ring",
+		ring2="Cacoethic Ring +1",
+		back=gear.cape_rng_crit,
+		waist="K. Kachina Belt +1",
+		legs="Adhemar Kecks +1",
+		feet="Orion Socks +2",}
+	
+	sets.Self_Healing = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash"}
+	sets.Cure_Received = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash"}
+	sets.Self_Refresh = {waist="Gishdubar Sash"}
+	
+    sets.midcast.Utsusemi = sets.midcast.FastRecast
+	
+	--------------------------------------
+	-- Idle/resting/defense/etc sets
+	--------------------------------------
+
+	-- Sets to return to when not performing an action.
+
+	-- Resting sets
+	sets.resting = {}
+
+	-- Idle sets
+    sets.idle = {
+        head="Malignance Chapeau",
+		neck="Loricate Torque +1",
+		ear1="Genmei Earring",
+		ear2="Sanare Earring",
+        body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1="Defending Ring",
+		ring2="Gelatinous Ring +1",
+        back="Moonlight Cape",
+		waist="Carrier's Sash",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+
+	sets.idle.Town = {
+        head="empty",
+		neck="Scout's Gorget +2",
+		ear1="Moonshade Earring",
+		ear2="Friomisi Earring",
+        body="Cohort Cloak +1",
+		hands="Nyame Gauntlets",
+		ring1="Weather. Ring +1",
+		ring2="Epaminondas's Ring",
+        back=gear.cape_rng_agimab,
+		waist="Orpheus's Sash",
+		legs="Arc. Braccae +3",
+		feet="Nyame Sollerets",}		
+ 
+    -- Defense sets
+    sets.defense.PDT = {
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Genmei Earring",ear2="Sanare Earring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Gelatinous Ring +1",
+        back="Moonlight Cape",waist="Flume Belt +1",legs="Malignance Tights",feet="Malignance Boots"}
+
+    sets.defense.MDT = {
+        head="Malignance Chapeau",neck="Loricate Torque +1",ear1="Genmei Earring",ear2="Sanare Earring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Shadow Ring",
+        back="Moonlight Cape",waist="Carrier's Sash",legs="Malignance Tights",feet="Malignance Boots"}
+		
+    sets.defense.MEVA = {
+        head="Malignance Chapeau",neck="Warder's Charm +1",ear1="Genmei Earring",ear2="Sanare Earring",
+        body="Malignance Tabard",hands="Malignance Gloves",ring1="Defending Ring",ring2="Shadow Ring",
+        back="Moonlight Cape",waist="Carrier's Sash",legs="Malignance Tights",feet="Malignance Boots"}
+
+    sets.Kiting = {legs="Carmine Cuisses +1"}
+	sets.DayIdle = {}
+	sets.NightIdle = {}
+	sets.BulletPouch = {waist="Chr. Bul. Pouch"}
+	
+	-- Weapons sets
+	sets.weapons.Fomalhaut = {main="Perun +1",sub="Nusku Shield",range="Fomalhaut"}
+	sets.weapons.CritGun = {main="Oneiros Knife",sub="Nusku Shield",range="Armageddon"}
+	sets.weapons.DualFomalhaut = {main="Perun +1",sub="Kustawi +1",range="Fomalhaut"}
+	sets.weapons.DualSavage = {main="Naegling",sub="Kraken Club",range="Sparrowhawk +2", ammo="Hauksbok Arrow",}
+	sets.weapons.DualWildfire = {main="Malevolence",sub="Malevolence",range="Armageddon"}
+	sets.weapons.DualCritGun = {main="Gleti's Knife",sub="Oneiros Knife",range="Armageddon"}
+	sets.weapons.DualTrueflight = {main="Tauret",sub="Kraken Club",range="Gastraphetes"}
+	sets.weapons.DualMagicWeapons = {main="Malevolence",sub="Malevolence",range="Gastraphetes"}
+
+
+
+	--------------------------------------
+	-- Engaged sets
+	--------------------------------------
+
+    -- Normal melee group
+    sets.engaged = {
+		head=gear.adhemar_head_atk,
+		neck="Scout's Gorget +2",
+		ear1="Sherida Earring",
+		ear2="Brutal Earring",
+		body="Adhemar Jacket +1",
+		hands=gear.adhemar_hands_atk,
+		ring1="Epona's Ring",
+		ring2="Petrov Ring",
+		back=gear.cape_rng_dw,
+		waist="Windbuffet Belt +1",
+		legs="Samnuha Tights",
+		feet=gear.herculean_ta_feet}
+    
+    sets.engaged.Acc = {
+		head="Dampening Tam",
+		neck="Combatant's Torque",
+		ear1="Cessance Earring",
+		ear2="Telos Earring",
+		body="Malignance Tabard",
+		hands=gear.adhemar_hands_acc,
+		ring1="Epona's Ring",
+		ring2="Petrov Ring",
+		back=gear.cape_rng_dw,
+		waist="Olseni Belt",
+		legs="Samnuha Tights",
+		feet="Malignance Boots"}
+
+    sets.engaged.DTLite = {
+		head="Malignance Chapeau",
+		neck="Iskur Gorget",
+		ear1="Cessance Earring",
+		ear2="Brutal Earring",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1="Epona's Ring",
+		ring2="Petrov Ring",
+		back=gear.cape_rng_dw,
+		waist="Windbuffet Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+		
+    sets.engaged.DT = {
+		head="Malignance Chapeau",
+		neck="Loricate Torque +1",
+		ear1="Cessance Earring",
+		ear2="Brutal Earring",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1="Defending Ring",
+		ring2="Gelatinous Ring +1",
+		back=gear.cape_rnd_dw,
+		waist="Windbuffet Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+
+    sets.engaged.DW = {
+		head=gear.adhemar_head_atk,
+		neck="Scout's Gorget +2",
+		ear1="Sherida Earring",
+		ear2="Brutal Earring",
+		body="Adhemar Jacket +1",
+		hands=gear.adhemar_hands_atk,
+		ring1="Epona's Ring",
+		ring2="Petrov Ring",
+		back=gear.cape_rng_dw,
+		waist="Windbuffet Belt +1",
+		legs="Samnuha Tights",
+		feet=gear.herculean_ta_feet}
+		
+    sets.engaged.DW.DT = {
+		head="Malignance Chapeau",
+		neck="Loricate Torque +1",
+		ear1="Cessance Earring",
+		ear2="Brutal Earring",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		ring1="Defending Ring",
+		ring2="Gelatinous Ring +1",
+		back=gear.cape_rnd_dw,
+		waist="Windbuffet Belt +1",
+		legs="Malignance Tights",
+		feet="Malignance Boots"}
+		
+    sets.engaged.DW.Acc = {
+		head="Dampening Tam",
+		neck="Combatant's Torque",
+		ear1="Cessance Earring",
+		ear2="Telos Earring",
+		body="Malignance Tabard",
+		hands=gear.adhemar_hands_acc,
+		ring1="Epona's Ring",
+		ring2="Petrov Ring",
+		back=gear.cape_rng_dw,
+		waist="Olseni Belt",
+		legs="Samnuha Tights",
+		feet="Malignance Boots"}
+	--------------------------------------
+	-- Custom buff sets
+	--------------------------------------
+	sets.buff.Doom = set_combine(sets.buff.Doom, {})
+end
+
+-- Select default macro book on initial load or subjob change.
+function select_default_macro_book()
+    if player.sub_job == 'NIN' then
+        set_macro_page(1, 7)
+    elseif player.sub_job == 'DNC' then
+		set_macro_page(1, 7)
+    elseif player.sub_job == 'DRG' then
+        set_macro_page(3, 7)
+    else
+        set_macro_page(1, 7)
+    end
+end
+function user_job_lockstyle()
+	windower.chat.input('/lockstyleset 024')
+end

@@ -1,0 +1,226 @@
+--Gearsets your character will use among multiple jobs.
+sets.BehemothSuit = {}
+sets.Sheltered = {ring2="Sheltered Ring"}
+sets.Capacity = {back="Mecisto. Mantle"}
+
+sets.buff.Doom = {neck="Nicander's Necklace",waist="Gishdubar Sash",ring1="Eshmun's Ring",ring2="Eshmun's Ring"}
+sets.TreasureHunter = {waist="Chaac Belt"}
+
+sets.precast.Item['Hallowed Water'] = {}
+sets.precast.Item['Holy Water'] = {}
+
+--Augmented items that you'll use among multiple jobs.
+
+gear.gada_conserve = { name="Gada", augments={'"Conserve MP"+5','MND+14','DMG:+9',}}
+gear.gada_indi = { name="Gada", augments={'Indi. eff. dur. +10','STR+3','"Mag.Atk.Bns."+7',}}
+gear.gada_enh = { name="Gada", augments={'Enh. Mag. eff. dur. +6','VIT+8','Mag. Acc.+2','"Mag.Atk.Bns."+20',}}
+
+gear.grioavolr_nuke = { name="Grioavolr", augments={'Magic burst dmg.+3%','MP+81','Mag. Acc.+25','"Mag.Atk.Bns."+13','Magic Damage +5',}}
+gear.grioavolr_pet_mab = { name="Grioavolr", augments={'Magic burst dmg.+3%','MP+81','Mag. Acc.+25','"Mag.Atk.Bns."+13','Magic Damage +5',}}
+
+gear.colada_refresh = { name="Colada", augments={'"Refresh"+2','Mag. Acc.+8','DMG:+12',}}
+gear.colada_enh = { name="Colada", augments={'Enh. Mag. eff. dur. +4','Mag. Acc.+2','"Mag.Atk.Bns."+5',}}
+
+gear.malevolence_1  = { name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}
+gear.malevolence_2 = { name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+8','"Fast Cast"+5',}}
+
+gear.linos_dexwsd = { name="Linos", augments={'Accuracy+15 Attack+15','Weapon skill damage +2%','STR+6 DEX+6',}}
+gear.linos_chrwsd = { name="Linos", augments={'Accuracy+14 Attack+14','Weapon skill damage +3%','STR+6 CHR+6',}}
+gear.linos_mdt = { name="Linos", augments={'Mag. Evasion+15','Magic dmg. taken -4%','HP+20',}}
+gear.linos_tp = { name="Linos", augments={'Accuracy+14 Attack+14','"Store TP"+4','Quadruple Attack +3',}}
+
+gear.adhemar_head_acc = { name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}}
+gear.adhemar_head_atk = { name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}}
+gear.adhemar_head_pdt = { name="Adhemar Bonnet +1", augments={'HP+105','Attack+13','Phys. dmg. taken -4',}}
+gear.adhemar_hands_acc = { name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}}
+gear.adhemar_hands_atk = { name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}}
+
+gear.acro_body_breath = { name="Acro Surcoat", augments={'Pet: Mag. Acc.+25','Pet: Breath+7',}}
+gear.acro_hands_tp = { name="Acro Gauntlets", augments={'Accuracy+24','"Store TP"+6','DEX+10',}}
+gear.acro_hands_breath = { name="Acro Gauntlets", augments={'Pet: Mag. Acc.+25','Pet: Breath+7',}}
+gear.acro_legs_breath = { name="Acro Breeches", augments={'Pet: "Mag.Atk.Bns."+25','Pet: Breath+8',}}
+gear.acro_feet_breath = { name="Acro Leggings", augments={'Pet: "Mag.Atk.Bns."+24','Pet: Breath+7',}}
+
+gear.taeon_head_pet_da = { name="Taeon Chapeau", augments={'Pet: Accuracy+23 Pet: Rng. Acc.+23','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+gear.taeon_head_snap = { name="Taeon Chapeau", augments={'"Snapshot"+4','"Snapshot"+5',}}
+gear.taeon_body_pet_da = {name="Taeon Tabard",augments={'Pet: Accuracy+24 Pet: Rng. Acc.+24','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+gear.taeon_body_phalanx = { name="Taeon Tabard", augments={'Evasion+18','Spell interruption rate down -10%','Phalanx +3',}}
+gear.taeon_hands_pet_da = { name="Taeon Gloves", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+gear.taeon_hands_phalanx = { name="Taeon Gloves", augments={'Phalanx +3',}}
+gear.taeon_legs_pet_da = { name="Taeon Tights", augments={'Pet: Accuracy+22 Pet: Rng. Acc.+22','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+gear.taeon_legs_phalanx = { name="Taeon Tights", augments={'Accuracy+20 Attack+20','"Triple Atk."+2','Phalanx +3',}}
+gear.taeon_feet_pet_da = { name="Taeon Boots", augments={'Pet: Accuracy+25 Pet: Rng. Acc.+25','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
+gear.taeon_feet_phalanx = { name="Taeon Boots", augments={'Accuracy+24','"Dual Wield"+5','Phalanx +3',}}
+
+gear.telchine_body_enh = { name="Telchine Chas.", augments={'"Elemental Siphon"+30','Enh. Mag. eff. dur. +10',}}
+gear.telchine_hands_enh = { name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}}
+gear.telchine_legs_enh = { name="Telchine Braconi", augments={'"Elemental Siphon"+30','Enh. Mag. eff. dur. +10',}}
+gear.telchine_legs_pet = { name="Telchine Braconi", augments={'Pet: Evasion+19','Pet: "Regen"+3','Pet: Damage taken -4%',}}
+
+gear.chironic_head_refresh = { name="Chironic Hat", augments={'"Dual Wield"+2','Accuracy+18','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}}
+gear.chironic_body_macc = { name="Chironic Doublet", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','"Fast Cast"+6','Mag. Acc.+14','"Mag.Atk.Bns."+10',}}
+gear.chironic_hands_th = { name="Chironic Gloves", augments={'Accuracy+4','"Mag.Atk.Bns."+19','"Treasure Hunter"+2',}}
+gear.chironic_legs_mnd = { name="Chironic Hose", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','MND+15','Mag. Acc.+12','"Mag.Atk.Bns."+5',}}
+gear.chironic_legs_int = { name="Chironic Hose", augments={'Mag. Acc.+30','"Resist Silence"+10','INT+14',}}
+gear.chironic_feet_refresh = { name="Chironic Slippers", augments={'MND+10','Pet: "Mag.Atk.Bns."+7','"Refresh"+2','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
+gear.chironic_feet_th = { name="Chironic Slippers", augments={'VIT+3','Pet: "Subtle Blow"+2','"Treasure Hunter"+2','Accuracy+18 Attack+18','Mag. Acc.+10 "Mag.Atk.Bns."+10',}}
+
+gear.apogee_head_magical = { name="Apogee Crown +1", augments={'MP+80','Pet: "Mag.Atk.Bns."+35','Blood Pact Dmg.+8',}}
+gear.apogee_head_physical = { name="Apogee Crown +1", augments={'MP+80','Pet: Attack+35','Blood Pact Dmg.+8',}}
+gear.apogee_legs_magical = { name="Apogee Slacks +1", augments={'MP+80','Pet: "Mag.Atk.Bns."+35','Blood Pact Dmg.+8',}}
+gear.apogee_legs_physical = { name="Apogee Slacks +1", augments={'Pet: STR+20','Blood Pact Dmg.+14','Pet: "Dbl. Atk."+4',}}
+
+gear.herculean_head_pet_repair = { name="Herculean Helm", augments={'Pet: "Mag.Atk.Bns."+26','"Repair" potency +7%','Pet: STR+10',}}
+gear.herculean_head_pet_da = { name="Herculean Helm", augments={'Pet: Attack+26 Pet: Rng.Atk.+26','Pet: "Dbl. Atk."+4','Pet: DEX+7',}}
+gear.herculean_head_pet_mab = { name="Herculean Helm", augments={'Pet: "Mag.Atk.Bns."+28','Pet: Phys. dmg. taken -1%','Pet: Attack+3 Pet: Rng.Atk.+3',}}
+gear.herculean_head_pet_wsd = { name="Herculean Helm", augments={'Pet: Mag. Acc.+4','Phys. dmg. taken -1%','Weapon skill damage +7%','Mag. Acc.+9 "Mag.Atk.Bns."+9',}}
+gear.herculean_head_pet_tp = { name="Herculean Helm", augments={'Pet: Accuracy+30 Pet: Rng. Acc.+30','Pet: "Store TP"+10','Pet: DEX+1','Pet: Attack+9 Pet: Rng.Atk.+9','Pet: "Mag.Atk.Bns."+14',}}
+gear.herculean_head_fc = { name="Herculean Helm", augments={'"Mag.Atk.Bns."+8','"Fast Cast"+5','Mag. Acc.+3',}}
+gear.herculean_body_wsd = { name="Herculean Vest", augments={'Attack+27','Weapon skill damage +5%','STR+3','Accuracy+8',}}
+gear.herculean_body_dex = { name="Herculean Vest", augments={'Accuracy+16 Attack+16','Weapon skill damage +3%','DEX+15','Accuracy+6',}}
+gear.herculean_body_ta = { name="Herculean Vest", augments={'Accuracy+20 Attack+20','"Triple Atk."+4','Attack+14',}}
+gear.herculean_body_pet_repair = { name="Herculean Vest", augments={'"Repair" potency +6%','Pet: "Mag.Atk.Bns."+8',}}
+gear.herculean_hands_pet_repair = { name="Herculean Gloves", augments={'Pet: Attack+3 Pet: Rng.Atk.+3','"Repair" potency +8%','Pet: "Mag.Atk.Bns."+3',}}
+gear.herculean_hands_pet_mab = { name="Herculean Gloves", augments={'Pet: "Mag.Atk.Bns."+29','Pet: "Dbl.Atk."+1 Pet: Crit.hit rate +1',}}
+gear.herculean_hands_pet_tp = { name="Herculean Gloves", augments={'Pet: Accuracy+22 Pet: Rng. Acc.+22','Pet: "Store TP"+8','Pet: STR+3','Pet: Attack+12 Pet: Rng.Atk.+12','Pet: "Mag.Atk.Bns."+1',}}
+gear.herculean_hands_refresh = { name="Herculean Gloves", augments={'MND+12','"Avatar perpetuation cost" -2','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}}
+gear.herculean_hands_th = { name="Herculean Gloves", augments={'STR+8','Pet: Attack+2 Pet: Rng.Atk.+2','"Treasure Hunter"+2','Accuracy+16 Attack+16','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
+gear.herculean_hands_qa = { name="Herculean Gloves", augments={'Attack+5','Quadruple Attack +3','Accuracy+20 Attack+20','Mag. Acc.+4 "Mag.Atk.Bns."+4',}}
+gear.herculean_hands_phalanx = { name="Herculean Gloves", augments={'Pet: "Mag.Atk.Bns."+16','Crit. hit damage +2%','Phalanx +4','Accuracy+12 Attack+12','Mag. Acc.+17 "Mag.Atk.Bns."+17',}}
+gear.herculean_legs_refresh = { name="Herculean Trousers", augments={'"Conserve MP"+1','MND+1','"Refresh"+2','Accuracy+17 Attack+17',}}
+gear.herculean_legs_pet_tp = { name="Herculean Trousers", augments={'Pet: Accuracy+25 Pet: Rng. Acc.+25','Pet: "Store TP"+10','Pet: INT+9','Pet: Attack+6 Pet: Rng.Atk.+6',}}
+gear.herculean_legs_pet_da = { name="Herculean Trousers", augments={'Pet: Attack+26 Pet: Rng.Atk.+26','Pet: "Dbl. Atk."+4','Pet: VIT+9',}}
+gear.herculean_legs_pet_repair = { name="Herculean Trousers", augments={'"Repair" potency +6%','Pet: INT+10','Pet: "Mag.Atk.Bns."+2',}}
+gear.herculean_feet_dw = { name="Herculean Boots", augments={'Accuracy+20','"Dual Wield"+6','DEX+3','Attack+8',}}
+gear.herculean_feet_th = { name="Herculean Boots", augments={'Pet: Phys. dmg. taken -4%','Pet: CHR+7','"Treasure Hunter"+1','Accuracy+5 Attack+5',}}
+gear.herculean_feet_crit = { name="Herculean Boots", augments={'Attack+14','Crit. hit damage +5%','MND+3','Accuracy+10',}}
+gear.herculean_feet_wsd = { name="Herculean Boots", augments={'Attack+7','Weapon skill damage +5%','STR+4','Accuracy+14',}}
+gear.herculean_feet_stp = { name="Herculean Boots", augments={'Attack+10','"Store TP"+6','DEX+6','Accuracy+11',}}
+gear.herculean_feet_pet_da = { name="Herculean Boots", augments={'Pet: Attack+23 Pet: Rng.Atk.+23','Pet: "Dbl. Atk."+3',}}
+gear.herculean_feet_pet_tp = { name="Herculean Boots", augments={'Pet: Accuracy+22 Pet: Rng. Acc.+22','Pet: "Store TP"+11','Pet: Attack+13 Pet: Rng.Atk.+13','Pet: "Mag.Atk.Bns."+1',}}
+gear.herculean_feet_phalanx = { name="Herculean Boots", augments={'Mag. Acc.+23','"Store TP"+2','Phalanx +5',}}
+gear.herculean_feet_refresh = { name="Herculean Boots", augments={'VIT+3','AGI+1','"Refresh"+2',}}
+gear.herculean_feet_ta = { name="Herculean Boots", augments={'Accuracy+25 Attack+25','"Triple Atk."+3','STR+10','Attack+4',}}
+
+gear.merlinic_head_mbd = { name="Merlinic Hood", augments={'"Mag.Atk.Bns."+18','Magic burst dmg.+10%','INT+6','Mag. Acc.+12',}}
+gear.merlinic_head_mdmg = { name="Merlinic Hood", augments={'Magic Damage +15','"Mag.Atk.Bns."+11',}}
+gear.merlinic_head_oa = { name="Merlinic Hood", augments={'"Mag.Atk.Bns."+9','"Occult Acumen"+9','INT+8',}}
+gear.merlinic_body_oa = { name="Merlinic Jubbah", augments={'Mag. Acc.+9','"Occult Acumen"+11','"Mag.Atk.Bns."+1',}}
+gear.merlinic_body_mbd = { name="Merlinic Jubbah", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst dmg.+9%','MND+4','Mag. Acc.+6','"Mag.Atk.Bns."+11',}}
+gear.merlinic_hands_pet_mab = { name="Merlinic Dastanas", augments={'Pet: Mag. Acc.+23 Pet: "Mag.Atk.Bns."+23','Blood Pact Dmg.+10','Pet: DEX+3','Pet: Mag. Acc.+4','Pet: "Mag.Atk.Bns."+6',}}
+gear.merlinic_hands_pet_atk = { name="Merlinic Dastanas", augments={'Pet: Attack+28 Pet: Rng.Atk.+28','Blood Pact Dmg.+10','Pet: Mag. Acc.+1',}}
+gear.merlinic_legs_oa = { name="Merlinic Shalwar", augments={'"Occult Acumen"+10','Mag. Acc.+13','"Mag.Atk.Bns."+10',}}
+gear.merlinic_legs_mbd = { name="Merlinic Shalwar", augments={'"Mag.Atk.Bns."+30','Magic burst dmg.+11%',}}
+gear.merlinic_legs_mab = { name="Merlinic Shalwar", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+2%','INT+9','Mag. Acc.+13','"Mag.Atk.Bns."+15',}}
+gear.merlinic_feet_drain = { name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','"Drain" and "Aspir" potency +8','Mag. Acc.+11','"Mag.Atk.Bns."+11',}}
+gear.merlinic_feet_oa = { name="Merlinic Crackows", augments={'Mag. Acc.+27','"Occult Acumen"+11','CHR+4',}}
+gear.merlinic_feet_mbd = { name="Merlinic Crackows", augments={'Mag. Acc.+29','Magic burst dmg.+11%','"Mag.Atk.Bns."+13',}}
+
+gear.odyssean_wsd_hands = { name="Odyssean Gauntlets",augments={'Accuracy+26','Weapon skill damage +4%','STR+6','Attack+14',}}
+gear.odyssean_stp_legs = {name="Odyssean Cuisses",augments={'Accuracy+28','"Store TP"+6','DEX+9',}}
+gear.odyssean_fc_legs = {name="Odyssean Cuisses",augments={'"Fast Cast"+6','"Mag.Atk.Bns."+12',}}
+
+gear.valorous_legs_stp = { name="Valorous Hose", augments={'Attack+22','"Store TP"+8','DEX+9','Accuracy+10',}}
+gear.valorous_legs_da = { name="Valorous Hose", augments={'Accuracy+27','"Dbl.Atk."+4','STR+10','Attack+15',}}
+gear.valorous_feet_crit = { name="Valorous Greaves", augments={'Crit. hit damage +3%','STR+12','Accuracy+5','Attack+3',}}
+gear.valorous_feet_wsd = { name="Valorous Greaves", augments={'Accuracy+14 Attack+14','Weapon skill damage +4%','STR+9',}}
+
+gear.rostam_a = { name="Rostam", augments={'Path: A',}}
+gear.rostam_b = { name="Rostam", augments={'Path: B',}}
+gear.rostam_c = { name="Rostam", augments={'Path: C',}}
+
+--Capes--
+gear.cape_war_wsd = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
+gear.cape_war_da = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}}
+gear.cape_war_vit = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}}
+gear.cape_war_tp = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
+
+gear.cape_cor_dw = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}}
+gear.cape_cor_strwsd = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+gear.cape_cor_dexstp = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Damage taken-5%',}}
+gear.cape_cor_agiwsd = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}}
+gear.cape_cor_snap = { name="Camulus's Mantle", augments={'"Snapshot"+10',}}
+gear.cape_cor_shoot = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}}
+gear.cape_cor_agimab = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Magic dmg. taken-10%',}}
+
+gear.cape_geo_idle = { name="Nantosuelta's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Pet: "Regen"+10','Pet: "Regen"+5',}}
+gear.cape_geo_nuke = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}}
+gear.cape_geo_skill = { name="Lifestream Cape", augments={'Geomancy Skill +10','Pet: Damage taken -3%',}}
+gear.cape_geo_indi = { name="Lifestream Cape", augments={'Geomancy Skill +8','Indi. eff. dur. +20','Pet: Damage taken -2%',}}
+
+gear.cape_blu_agi = { name="Rosmerta's Cape", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Evasion+15',}}
+gear.cape_blu_strwsd = { name="Rosmerta's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
+gear.cape_blu_fc = { name="Rosmerta's Cape", augments={'"Fast Cast"+10','Spell interruption rate down-10%',}}
+gear.cape_blu_cure = { name="Rosmerta's Cape", augments={'MND+20','"Cure" potency +10%',}}
+gear.cape_blu_dexwsd = { name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}}
+gear.cape_blu_tp = { name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+gear.cape_blu_nuke = { name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}}
+gear.cape_blu_skill = { name="Cornflower Cape", augments={'MP+28','DEX+2','Accuracy+6','Blue Magic skill +10',}}
+
+gear.cape_rng_agimab = { name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}}
+gear.cape_rng_strwsd = { name="Belenus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Damage taken-5%',}}
+gear.cape_rng_crit = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Crit.hit rate+10',}}
+gear.cape_rng_dw = { name="Belenus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}}
+gear.cape_rng_agiwsd = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}}
+gear.cape_rng_snap = { name="Belenus's Mantle", augments={'"Snapshot"+10',}}
+gear.cape_rng_shoot = { name="Belenus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}}
+
+gear.cape_rdm_dw = { name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}}
+gear.cape_rdm_strwsd = { name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Damage taken-5%',}}
+gear.cape_rdm_mndwsd = { name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Weapon skill damage +10%',}}
+gear.cape_rdm_mab = { name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+gear.cape_rdm_crit = { name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Damage taken-5%',}}
+
+gear.cape_brd_strwsd = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
+gear.cape_brd_dexwsd = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}}
+gear.cape_brd_macc = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}}
+gear.cape_brd_tp = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+gear.cape_brd_chrwsd = { name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
+
+gear.cape_mnk_strcrit = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Crit.hit rate+10',}}
+gear.cape_mnk_counter = { name="Segomo's Mantle", augments={'HP+60','Accuracy+20 Attack+20','"Dbl.Atk."+10','System: 1 ID: 640 Val: 4',}}
+gear.cape_mnk_strda = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}}
+gear.cape_mnk_vitwsd = { name="Segomo's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}}
+gear.cape_mnk_tp = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
+gear.cape_mnk_dexda = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}}
+
+gear.cape_drg_dexda = { name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
+gear.cape_drg_strda = { name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10','Damage taken-5%',}}
+gear.cape_drg_strwsd = { name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
+gear.cape_drg_strcrit = { name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Crit.hit rate+10',}}
+gear.cape_drg_strtp = { name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}}
+
+gear.cape_thf_dexwsd = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}}
+gear.cape_thf_dw = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}}
+gear.cape_thf_mab = { name="Toutatis's Cape", augments={'DEX+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10','Damage taken-5%',}}
+gear.cape_thf_stp = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+
+gear.cape_smn_petatk = { name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Eva.+20 /Mag. Eva.+20','Pet: Accuracy+10 Pet: Rng. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}}
+gear.cape_smn_petmab = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Magic Damage+10','"Store TP"+10',}}
+gear.cape_smn_cure = { name="Campestres's Cape", augments={'MND+20','Accuracy+20 Attack+20','MND+10','"Cure" potency +10%',}}
+
+gear.cape_pup_tp = { name="Visucius's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Damage taken-5%',}}
+gear.cape_pup_petmab = { name="Visucius's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
+gear.cape_pup_crit = { name="Visucius's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}}
+gear.cape_pup_petatk = { name="Visucius's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Accuracy+20 Attack+20','Pet: Haste+10','Pet: Damage taken -5%',}}
+gear.cape_pup_dexda ={ name="Visucius's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}}
+gear.cape_pup_vitda = { name="Visucius's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}}
+gear.cape_pup_strda = { name="Visucius's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}}
+gear.cape_pup_strwsd = { name="Visucius's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}}
+
+gear.cape_sam_strwsd = { name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
+gear.cape_sam_tp = { name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
+gear.cape_sam_mab = { name="Smertrios's Mantle", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+
+gear.cape_run_mdt = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Magic dmg. taken-10%',}}
+gear.cape_run_pdt = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity+10','Phys. dmg. taken-10%',}}
+gear.cape_run_tp = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+gear.cape_run_dexwsd = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+gear.cape_run_strda = { name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+gear.cape_run_fc = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Spell interruption rate down-10%',}}
+
+gear.cape_sch_int = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Damage taken-5%',}}
+gear.cape_sch_mnd = { name="Lugh's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}}
+
+
+
